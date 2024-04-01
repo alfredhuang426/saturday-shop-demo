@@ -1,0 +1,10 @@
+.navbar {
+    &-height {
+        height: 62px;
+    }
+    &-interior {
+        &-height {
+            height: 46px;
+        }
+    }
+}

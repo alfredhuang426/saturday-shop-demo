@@ -1,12 +1,17 @@
 import { FaHamburger } from "react-icons/fa";
+import styles from "./Navbar.module.scss";
 
 export const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-      <div className="container-fluid">
+    <nav
+      className={`navbar navbar-expand-md navbar-dark bg-primary fixed-top ${styles["navbar-height"]}`}
+    >
+      <div
+        className={`container-fluid align-items-center ${styles["navbar-interior-height"]}`}
+      >
         <a className="navbar-brand d-flex align-items-center" href="#">
           <FaHamburger />
-          <h1 className="h3 mb-0 px-3">Saturday's</h1>
+          <h1 className="h3 mb-0 px-2">Saturday's</h1>
         </a>
         <button
           className="navbar-toggler"
@@ -29,7 +34,7 @@ export const Navbar = () => {
               id="offcanvasNavbarLabel"
             >
               <FaHamburger />
-              <span className="px-3">Saturday's</span>
+              <span className="px-2">Saturday's</span>
             </h5>
             <button
               type="button"
@@ -38,15 +43,19 @@ export const Navbar = () => {
               aria-label="Close"
             ></button>
           </div>
-          <div className="offcanvas-body">
+          <div className="offcanvas-body bg-primary">
             <ul className="navbar-nav justify-content-between flex-grow-1 pe-3">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
+                <a
+                  className="nav-link active fs-5"
+                  aria-current="page"
+                  href="#"
+                >
                   產品列表
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link active fs-5" href="#">
                   購物車列表
                 </a>
               </li>

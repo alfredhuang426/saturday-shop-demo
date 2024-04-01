@@ -3,3 +3,7 @@
 @import "./variables";
 
 @import "bootstrap/scss/bootstrap";
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+body {
+    font-family: "Noto Sans TC", sans-serif !important;
+}
