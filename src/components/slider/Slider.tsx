@@ -14,7 +14,6 @@ export const Slider = () => {
       const productsResult = await axios.get(
         `/v2/api/${process.env.REACT_APP_API_PATH}/products/all`
       );
-      console.log(productsResult.data.products.slice(-6));
       setProducts(productsResult.data.products.slice(-6));
     } catch (error) {
       console.log(error);
@@ -33,7 +32,7 @@ export const Slider = () => {
         <div className={styles.slider}>
           <div className={`${styles.slides} d-md-flex`}>
             {products.map((product) => (
-              <div className={styles.slide}>
+              <div className={styles.slide} key={product?.id}>
                 <img
                   className={styles.img}
                   src={product?.imageUrl}
