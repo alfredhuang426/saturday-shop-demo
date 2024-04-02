@@ -1,0 +1,147 @@
+.slider {
+    height: 778px;
+    overflow: hidden;
+    margin: 0 auto;
+    @media (min-width: 768px) {
+        height: auto;
+    }
+}
+
+.slides {
+    animation: slide 10s infinite;
+    @media (min-width: 768px) {
+        animation: slide 8s infinite;
+    }
+}
+
+.slide {
+    margin-right: 30px;
+    margin-bottom: 30px;
+}
+
+.img {
+    height: 300px;
+    width: 100%;
+    @media (min-width: 768px) {
+        width: 212px;
+        height: 250px;
+    }
+    @media (min-width: 992px) {
+        width: 292px;
+        height: 250px;
+    }
+    @media (min-width: 1200px) {
+        width: 352px;
+        height: 250px;
+    }
+    @media (min-width: 1400px) {
+        width: 412px;
+        height: 250px;
+    }
+    object-fit: cover;
+}
+
+.h4 {
+    height: 30px;
+}
+
+@keyframes slide {
+    0% {
+        transform: translateY(0);
+    }
+    20% {
+        transform: translateY(-404px);
+    }
+    40% {
+        transform: translateY(-808px);
+    }
+    60% {
+        transform: translateY(-1212px);
+    }
+    80% {
+        transform: translateY(-1616px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@media (min-width: 768px) {
+    @keyframes slide {
+        0% {
+            transform: translateX(0);
+        }
+        25% {
+            transform: translateX(-242px);
+        }
+        50% {
+            transform: translateX(-484px);
+        }
+        75% {
+            transform: translateX(-726px);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    @keyframes slide {
+        0% {
+            transform: translateX(0);
+        }
+        25% {
+            transform: translateX(-322px);
+        }
+        50% {
+            transform: translateX(-644px);
+        }
+        75% {
+            transform: translateX(-966px);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+    @keyframes slide {
+        0% {
+            transform: translateX(0);
+        }
+        25% {
+            transform: translateX(-382px);
+        }
+        50% {
+            transform: translateX(-764px);
+        }
+        75% {
+            transform: translateX(-1146px);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+}
+
+@media (min-width: 1400px) {
+    @keyframes slide {
+        0% {
+            transform: translateX(0);
+        }
+        25% {
+            transform: translateX(-442px);
+        }
+        50% {
+            transform: translateX(-884px);
+        }
+        75% {
+            transform: translateX(-1326px);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+}

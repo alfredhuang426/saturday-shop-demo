@@ -1,5 +1,6 @@
 import { FaHamburger } from "react-icons/fa";
 import styles from "./Navbar.module.scss";
+import { NavLink } from "react-router-dom";
 
 export const Navbar = () => {
   return (
@@ -9,10 +10,10 @@ export const Navbar = () => {
       <div
         className={`container-fluid align-items-center ${styles["navbar-interior-height"]}`}
       >
-        <a className="navbar-brand d-flex align-items-center" href="#">
+        <NavLink className="navbar-brand d-flex align-items-center" to="/">
           <FaHamburger />
           <h1 className="h3 mb-0 px-2">Saturday's</h1>
-        </a>
+        </NavLink>
         <button
           className="navbar-toggler"
           type="button"
@@ -46,18 +47,18 @@ export const Navbar = () => {
           <div className="offcanvas-body bg-primary">
             <ul className="navbar-nav justify-content-between flex-grow-1 pe-3">
               <li className="nav-item">
-                <a
+                <NavLink
                   className="nav-link active fs-5"
                   aria-current="page"
-                  href="#"
+                  to="/products"
                 >
                   產品列表
-                </a>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <a className="nav-link active fs-5" href="#">
+                <NavLink className="nav-link active fs-5" to="/cart">
                   購物車列表
-                </a>
+                </NavLink>
               </li>
             </ul>
           </div>
