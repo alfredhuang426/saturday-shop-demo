@@ -1,9 +1,9 @@
 .slider {
-    height: 778px;
+    max-height: 778px;
     overflow: hidden;
     margin: 0 auto;
     @media (min-width: 768px) {
-        height: auto;
+        max-height: auto;
     }
 }
 

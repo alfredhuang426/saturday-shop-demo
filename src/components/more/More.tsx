@@ -23,7 +23,7 @@ export const More = () => {
               <li className="my-3">鮮蔬大麥克</li>
             </ul>
             <div>
-              <NavLink to="/" className="btn btn-primary w-100">
+              <NavLink to="/" className="btn btn-primary w-100 text-white">
                 前往選購
               </NavLink>
             </div>
@@ -49,7 +49,7 @@ export const More = () => {
               <li className="my-3">炸魚薯條</li>
             </ul>
             <div>
-              <NavLink to="/" className="btn btn-primary w-100">
+              <NavLink to="/" className="btn btn-primary w-100 text-white">
                 前往選購
               </NavLink>
             </div>
@@ -76,7 +76,7 @@ export const More = () => {
               <li className="my-3">肉醬義大利麵</li>
             </ul>
             <div>
-              <NavLink to="/" className="btn btn-primary w-100">
+              <NavLink to="/" className="btn btn-primary w-100 text-white">
                 前往選購
               </NavLink>
             </div>
@@ -101,7 +101,7 @@ export const More = () => {
               <li className="my-3">總匯披薩</li>
             </ul>
             <div>
-              <NavLink to="/" className="btn btn-primary w-100">
+              <NavLink to="/" className="btn btn-primary w-100 text-white">
                 前往選購
               </NavLink>
             </div>

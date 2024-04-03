@@ -29,6 +29,13 @@ export const Slider = () => {
     <>
       <div className="container mb-5">
         <h3 className="border-start border-5 px-3 border-primary">熱門商品</h3>
+        {isLoading && (
+          <div className="d-flex justify-content-center mt-5">
+            <div className="spinner-border text-primary" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        )}
         <div className={styles.slider}>
           <div className={`${styles.slides} d-md-flex`}>
             {products.map((product) => (
