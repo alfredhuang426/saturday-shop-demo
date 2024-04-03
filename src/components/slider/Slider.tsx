@@ -53,48 +53,6 @@ export const Slider = () => {
                 </div>
               </div>
             ))}
-            {/* <div className={styles.slide}>
-              <img
-                className={styles.img}
-                src="https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=1489"
-                alt="XD 1"
-              />
-            </div>
-            <div className={styles.slide}>
-              <img
-                className={styles.img}
-                src="https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=1489"
-                alt="XD 1"
-              />
-            </div>
-            <div className={styles.slide}>
-              <img
-                className={styles.img}
-                src="https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=1489"
-                alt="XD 1"
-              />
-            </div>
-            <div className={styles.slide}>
-              <img
-                className={styles.img}
-                src="https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=1489"
-                alt="XD 1"
-              />
-            </div>
-            <div className={styles.slide}>
-              <img
-                className={styles.img}
-                src="https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=1489"
-                alt="XD 1"
-              />
-            </div>
-            <div className={styles.slide}>
-              <img
-                className={styles.img}
-                src="https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=1489"
-                alt="XD 1"
-              />
-            </div> */}
           </div>
         </div>
       </div>
