@@ -66,82 +66,38 @@
     }
 }
 
-@media (min-width: 768px) {
+@mixin slide-keyframes($offset) {
     @keyframes slide {
         0% {
             transform: translateX(0);
         }
         25% {
-            transform: translateX(-242px);
+            transform: translateX($offset);
         }
         50% {
-            transform: translateX(-484px);
+            transform: translateX($offset * 2);
         }
         75% {
-            transform: translateX(-726px);
+            transform: translateX($offset * 3);
         }
         100% {
             transform: translateX(0);
         }
     }
+}
+
+@media (min-width: 768px) {
+    @include slide-keyframes(-242px);
 }
 
 @media (min-width: 992px) {
-    @keyframes slide {
-        0% {
-            transform: translateX(0);
-        }
-        25% {
-            transform: translateX(-322px);
-        }
-        50% {
-            transform: translateX(-644px);
-        }
-        75% {
-            transform: translateX(-966px);
-        }
-        100% {
-            transform: translateX(0);
-        }
-    }
+    @include slide-keyframes(-322px);
 }
 
 @media (min-width: 1200px) {
-    @keyframes slide {
-        0% {
-            transform: translateX(0);
-        }
-        25% {
-            transform: translateX(-382px);
-        }
-        50% {
-            transform: translateX(-764px);
-        }
-        75% {
-            transform: translateX(-1146px);
-        }
-        100% {
-            transform: translateX(0);
-        }
-    }
+    @include slide-keyframes(-382px);
 }
 
 @media (min-width: 1400px) {
-    @keyframes slide {
-        0% {
-            transform: translateX(0);
-        }
-        25% {
-            transform: translateX(-442px);
-        }
-        50% {
-            transform: translateX(-884px);
-        }
-        75% {
-            transform: translateX(-1326px);
-        }
-        100% {
-            transform: translateX(0);
-        }
-    }
+    @include slide-keyframes(-442px);
 }
