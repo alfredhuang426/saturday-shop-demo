@@ -6,7 +6,7 @@ import styles from "./Product.module.scss";
 export const Products = () => {
   const tab = useRef<Tab | null>(null);
   useEffect(() => {
-    tab.current = new Tab("#list-profile-list");
+    tab.current = new Tab("#pills-profile-tab");
     setTimeout(() => {
       tab.current?.show();
     }, 2000);
@@ -15,107 +15,123 @@ export const Products = () => {
     <>
       <Banner />
       <div className="container mb-5">
-        <div className="row">
-          <div>
-            <div
-              className="list-group list-group-horizontal"
-              id="list-tab"
-              role="tablist"
+        <ul
+          className="nav nav-pills mb-3 justify-content-center"
+          id="pills-tab"
+          role="tablist"
+        >
+          <li className="nav-item" role="presentation">
+            <button
+              className="nav-link active"
+              id="pills-home-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-home"
+              type="button"
+              role="tab"
+              aria-controls="pills-home"
+              aria-selected="true"
             >
-              <a
-                className="list-group-item list-group-item-action text-center active"
-                id="list-all-list"
-                data-bs-toggle="list"
-                href="#list-all"
-                role="tab"
-                aria-controls="list-home"
-              >
-                All
-              </a>
-              <a
-                className="list-group-item list-group-item-action text-center"
-                id="list-home-list"
-                data-bs-toggle="list"
-                href="#list-home"
-                role="tab"
-                aria-controls="list-home"
-              >
-                Home
-              </a>
-              <a
-                className="list-group-item list-group-item-action text-center"
-                id="list-profile-list"
-                data-bs-toggle="list"
-                href="#list-profile"
-                role="tab"
-                aria-controls="list-profile"
-              >
-                Profile
-              </a>
-              <a
-                className="list-group-item list-group-item-action text-center"
-                id="list-messages-list"
-                data-bs-toggle="list"
-                href="#list-messages"
-                role="tab"
-                aria-controls="list-messages"
-              >
-                Messages
-              </a>
-              <a
-                className="list-group-item list-group-item-action text-center"
-                id="list-settings-list"
-                data-bs-toggle="list"
-                href="#list-settings"
-                role="tab"
-                aria-controls="list-settings"
-              >
-                Settings
-              </a>
+              Home
+            </button>
+          </li>
+          <li className="nav-item" role="presentation">
+            <button
+              className="nav-link"
+              id="pills-profile-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-profile"
+              type="button"
+              role="tab"
+              aria-controls="pills-profile"
+              aria-selected="false"
+            >
+              Profile
+            </button>
+          </li>
+          <li className="nav-item" role="presentation">
+            <button
+              className="nav-link"
+              id="pills-contact-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-contact"
+              type="button"
+              role="tab"
+              aria-controls="pills-contact"
+              aria-selected="false"
+            >
+              Contact
+            </button>
+          </li>
+          <li className="nav-item" role="presentation">
+            <button
+              className="nav-link"
+              id="pills-contact1-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-contact1"
+              type="button"
+              role="tab"
+              aria-controls="pills-contact1"
+              aria-selected="false"
+            >
+              Contact1
+            </button>
+          </li>
+          <li className="nav-item" role="presentation">
+            <button
+              className="nav-link"
+              id="pills-contact2-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-contact2"
+              type="button"
+              role="tab"
+              aria-controls="pills-contact2"
+              aria-selected="false"
+            >
+              Contact2
+            </button>
+          </li>
+        </ul>
+        <div className="row">
+          <div className="tab-content" id="pills-tabContent">
+            <div
+              className="tab-pane fade show active"
+              id="pills-home"
+              role="tabpanel"
+              aria-labelledby="pills-home-tab"
+            >
+              home
             </div>
-          </div>
-          <div>
-            <div className="tab-content" id="nav-tabContent">
-              <div
-                className="tab-pane fade show active"
-                id="list-all"
-                role="tabpanel"
-                aria-labelledby="list-all-list"
-              >
-                All
-              </div>
-              <div
-                className="tab-pane fade show"
-                id="list-home"
-                role="tabpanel"
-                aria-labelledby="list-home-list"
-              >
-                home
-              </div>
-              <div
-                className="tab-pane fade"
-                id="list-profile"
-                role="tabpanel"
-                aria-labelledby="list-profile-list"
-              >
-                profile
-              </div>
-              <div
-                className="tab-pane fade"
-                id="list-messages"
-                role="tabpanel"
-                aria-labelledby="list-messages-list"
-              >
-                messages
-              </div>
-              <div
-                className="tab-pane fade"
-                id="list-settings"
-                role="tabpanel"
-                aria-labelledby="list-settings-list"
-              >
-                settings
-              </div>
+            <div
+              className="tab-pane fade"
+              id="pills-profile"
+              role="tabpanel"
+              aria-labelledby="pills-profile-tab"
+            >
+              profile
+            </div>
+            <div
+              className="tab-pane fade"
+              id="pills-contact"
+              role="tabpanel"
+              aria-labelledby="pills-contact-tab"
+            >
+              contact
+            </div>
+            <div
+              className="tab-pane fade"
+              id="pills-contact1"
+              role="tabpanel"
+              aria-labelledby="pills-contact1-tab"
+            >
+              contact1
+            </div>
+            <div
+              className="tab-pane fade"
+              id="pills-contact2"
+              role="tabpanel"
+              aria-labelledby="pills-contact2-tab"
+            >
+              contact2
             </div>
           </div>
         </div>
