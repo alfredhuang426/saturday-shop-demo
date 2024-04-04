@@ -1,8 +1,22 @@
 import { FaHamburger } from "react-icons/fa";
 import styles from "./Navbar.module.scss";
 import { NavLink } from "react-router-dom";
+import { Offcanvas } from "bootstrap";
+import { useEffect, useRef } from "react";
 
 export const Navbar = () => {
+  const offcanvas = useRef<Offcanvas | null>(null);
+  useEffect(() => {
+    offcanvas.current = new Offcanvas("#offcanvasNavbar", {
+      backdrop: true,
+    });
+  }, []);
+  const openOffcanvas = () => {
+    offcanvas.current?.show();
+  };
+  const closeOffcanvas = () => {
+    offcanvas.current?.hide();
+  };
   return (
     <nav
       className={`navbar navbar-expand-md navbar-dark bg-primary fixed-top ${styles["navbar-height"]}`}
@@ -20,6 +34,7 @@ export const Navbar = () => {
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasNavbar"
           aria-controls="offcanvasNavbar"
+          onClick={openOffcanvas}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -42,6 +57,7 @@ export const Navbar = () => {
               className="btn-close text-reset"
               data-bs-dismiss="offcanvas"
               aria-label="Close"
+              onClick={closeOffcanvas}
             ></button>
           </div>
           <div className="offcanvas-body bg-primary">
@@ -51,12 +67,17 @@ export const Navbar = () => {
                   className="nav-link active fs-5"
                   aria-current="page"
                   to="/products"
+                  onClick={closeOffcanvas}
                 >
                   產品列表
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link active fs-5" to="/cart">
+                <NavLink
+                  className="nav-link active fs-5"
+                  to="/cart"
+                  onClick={closeOffcanvas}
+                >
                   購物車列表
                 </NavLink>
               </li>

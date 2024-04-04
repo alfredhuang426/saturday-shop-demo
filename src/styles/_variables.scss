@@ -563,8 +563,8 @@ $box-shadow-lg:               0 1rem 3rem rgba($black, .175) !default;
 $box-shadow-inset:            inset 0 1px 2px rgba($black, .075) !default;
 // scss-docs-end box-shadow-variables
 
-$component-active-color:      $white !default;
-$component-active-bg:         $primary !default;
+$component-active-color:      $primary !default;
+$component-active-bg:         $white !default;
 
 // scss-docs-start focus-ring-variables
 $focus-ring-width:      .25rem !default;
@@ -1580,9 +1580,9 @@ $progress-bar-transition:           width .6s ease !default;
 // List group
 
 // scss-docs-start list-group-variables
-$list-group-color:                  var(--#{$prefix}body-color) !default;
-$list-group-bg:                     var(--#{$prefix}body-bg) !default;
-$list-group-border-color:           var(--#{$prefix}border-color) !default;
+$list-group-color:                  $white !default;
+$list-group-bg:                     $primary !default;
+$list-group-border-color:           $primary !default;
 $list-group-border-width:           var(--#{$prefix}border-width) !default;
 $list-group-border-radius:          var(--#{$prefix}border-radius) !default;
 
@@ -1596,13 +1596,13 @@ $list-group-item-color-scale:       40% !default; // Deprecated in v5.3.0
 $list-group-hover-bg:               var(--#{$prefix}tertiary-bg) !default;
 $list-group-active-color:           $component-active-color !default;
 $list-group-active-bg:              $component-active-bg !default;
-$list-group-active-border-color:    $list-group-active-bg !default;
+$list-group-active-border-color:    $primary !default;
 
 $list-group-disabled-color:         var(--#{$prefix}secondary-color) !default;
 $list-group-disabled-bg:            $list-group-bg !default;
 
 $list-group-action-color:           var(--#{$prefix}secondary-color) !default;
-$list-group-action-hover-color:     var(--#{$prefix}emphasis-color) !default;
+$list-group-action-hover-color:     $primary !default;
 
 $list-group-action-active-color:    var(--#{$prefix}body-color) !default;
 $list-group-action-active-bg:       var(--#{$prefix}secondary-bg) !default;
