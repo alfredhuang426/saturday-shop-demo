@@ -1,29 +1,21 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Product } from "../../types/products.type";
 import styles from "./Slider.module.scss";
 import { NavLink } from "react-router-dom";
 
-export const Slider = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setLoading] = useState(false);
+type SliderProps = {
+  products?: Product[];
+  isLoading?: boolean;
+};
 
-  const getProducts = async () => {
-    setLoading(true);
-    try {
-      const productsResult = await axios.get(
-        `/v2/api/${process.env.REACT_APP_API_PATH}/products/all`
-      );
-      setProducts(productsResult.data.products.slice(-6));
-    } catch (error) {
-      console.log(error);
-    }
-    setLoading(false);
-  };
-
+export const Slider: FC<SliderProps> = ({
+  products = [],
+  isLoading = false,
+}) => {
+  const [shownProducts, setShownProducts] = useState<Product[]>([]);
   useEffect(() => {
-    getProducts();
-  }, []);
+    setShownProducts(products.slice(-6));
+  }, [products]);
 
   return (
     <>
@@ -38,7 +30,7 @@ export const Slider = () => {
         )}
         <div className={styles.slider}>
           <div className={`${styles.slides} d-md-flex`}>
-            {products.map((product) => (
+            {shownProducts.map((product) => (
               <div className={styles.slide} key={product?.id}>
                 <img
                   className={styles.img}

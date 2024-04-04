@@ -2,10 +2,14 @@ import { useEffect, useRef } from "react";
 import { Tab } from "bootstrap";
 import { Banner } from "../../components/banner/Banner";
 import styles from "./Product.module.scss";
+import { useSearchParams } from "react-router-dom";
 
 export const Products = () => {
   const tab = useRef<Tab | null>(null);
+  const [searchParams] = useSearchParams();
   useEffect(() => {
+    const query = searchParams.get("category");
+    console.log(query);
     tab.current = new Tab("#pills-profile-tab");
     setTimeout(() => {
       tab.current?.show();
