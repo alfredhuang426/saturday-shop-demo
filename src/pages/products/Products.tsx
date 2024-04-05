@@ -1,23 +1,21 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Tab } from "bootstrap";
 import { Banner } from "../../components/banner/Banner";
-import styles from "./Product.module.scss";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { Product } from "../../types/products.type";
 import { categoryConfig } from "../../configs/category-config";
+import styles from "./Product.module.scss";
 
 export const Products = () => {
   const tab = useRef<Tab | null>(null);
   const [searchParams] = useSearchParams();
-
-  // const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [classifiedProducts, setClassifiedProducts] = useState<
     Map<string, Product[]>
   >(new Map<string, Product[]>());
 
-  const getProducts = async () => {
+  const getProducts = useCallback(async () => {
     setIsLoading(true);
     try {
       const productsResult = await axios.get(
@@ -30,7 +28,7 @@ export const Products = () => {
       console.log(error);
     }
     setIsLoading(false);
-  };
+  }, []);
 
   const classifiedProductsProcess = (
     products: Product[]
@@ -49,14 +47,16 @@ export const Products = () => {
 
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [getProducts]);
+
   useEffect(() => {
     const query = searchParams.get("category");
     if (query && classifiedProducts.get(query)) {
       tab.current = new Tab(`#${query}-tab`);
       tab.current?.show();
     }
-  }, [classifiedProducts]);
+  }, [classifiedProducts, searchParams]);
+
   return (
     <>
       <Banner />
@@ -85,7 +85,7 @@ export const Products = () => {
                     type="button"
                     role="tab"
                     aria-controls={`#pills-${classifiedProduct?.[0]}`}
-                    aria-selected={`${index === 0 ? "true" : "false"}`}
+                    aria-selected={index === 0 ? true : false}
                   >
                     {categoryConfig?.[classifiedProduct?.[0]]}
                   </button>
@@ -93,7 +93,7 @@ export const Products = () => {
               );
             })}
           </ul>
-          <div className="row">
+          <div className="row mt-3">
             <div className="tab-content" id="pills-tabContent">
               {Array.from(classifiedProducts).map(
                 (classifiedProduct, index) => {
@@ -107,7 +107,69 @@ export const Products = () => {
                       role="tabpanel"
                       aria-labelledby={`pills-${classifiedProduct?.[0]}-tab`}
                     >
-                      {classifiedProduct?.[0]}
+                      <div className="container">
+                        <div className="row">
+                          {classifiedProduct?.[1]?.map((product) => (
+                            <div
+                              className="col-sm-6 col-md-4 my-3"
+                              key={product?.id}
+                            >
+                              <div className="card w-100 h-100">
+                                <img
+                                  src={product?.imageUrl}
+                                  className={`card-img-top ${styles.img}`}
+                                  alt={product?.title}
+                                />
+                                <div className="card-body d-flex flex-column align-items-center justify-content-start">
+                                  <h4 className="mb-0 text-primary">
+                                    {product?.title}
+                                  </h4>
+                                  <p className="card-text text-muted my-3">
+                                    {product?.description}
+                                  </p>
+                                  <div className="mt-auto">
+                                    <div className="mt-2 text-center d-sm-flex d-md-block d-lg-flex">
+                                      <del className="text-muted me-sm-3 me-md-0 me-lg-3">
+                                        <small>
+                                          原價：NT ${product?.price}
+                                        </small>
+                                      </del>
+                                      <p className="text-primary mb-0">
+                                        售價：
+                                        <strong>
+                                          NT ${product?.origin_price}
+                                        </strong>
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="card-footer d-flex justify-content-around py-3">
+                                  <div className="container px-0">
+                                    <div className="row gx-2">
+                                      <div className="col-6">
+                                        <button
+                                          type="button"
+                                          className="btn btn-outline-secondary w-100 h-100"
+                                        >
+                                          查看更多
+                                        </button>
+                                      </div>
+                                      <div className="col-6">
+                                        <button
+                                          type="button"
+                                          className="btn btn-primary w-100 h-100 text-white"
+                                        >
+                                          加入購物車
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   );
                 }
