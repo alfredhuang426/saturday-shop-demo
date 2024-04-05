@@ -64,7 +64,7 @@ export const Navbar = () => {
             <ul className="navbar-nav justify-content-between flex-grow-1 pe-3">
               <li className="nav-item">
                 <NavLink
-                  className="nav-link active fs-5"
+                  className="nav-link active fs-6"
                   aria-current="page"
                   to="/products"
                   onClick={closeOffcanvas}
@@ -74,7 +74,7 @@ export const Navbar = () => {
               </li>
               <li className="nav-item">
                 <NavLink
-                  className="nav-link active fs-5"
+                  className="nav-link active fs-6"
                   to="/cart"
                   onClick={closeOffcanvas}
                 >
