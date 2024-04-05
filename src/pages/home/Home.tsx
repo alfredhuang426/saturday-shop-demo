@@ -8,9 +8,9 @@ import axios from "axios";
 
 export const Home = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const getProducts = async () => {
-    setLoading(true);
+    setIsLoading(true);
     try {
       const productsResult = await axios.get(
         `/v2/api/${process.env.REACT_APP_API_PATH}/products/all`
@@ -19,7 +19,7 @@ export const Home = () => {
     } catch (error) {
       console.log(error);
     }
-    setLoading(false);
+    setIsLoading(false);
   };
 
   useEffect(() => {

@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import styles from "./More.module.scss";
 import { Product } from "../../types/products.type";
 import { FC, useEffect, useState } from "react";
+import { categoryConfig } from "../../configs/category-config";
 
 type SliderProps = {
   products?: Product[];
@@ -31,8 +32,8 @@ export const More: FC<SliderProps> = ({ products = [], isLoading = false }) => {
       } catch (error) {
         console.error(error);
       }
+      setIsClassifiedCompleted(true);
     }
-    setIsClassifiedCompleted(true);
   }, [products, isLoading]);
   return (
     <div className="container my-5">
@@ -48,7 +49,7 @@ export const More: FC<SliderProps> = ({ products = [], isLoading = false }) => {
           return (
             <div className="col-md-6 mb-5" key={classifiedProduct?.[0]}>
               <h3 className="border-start border-bottom border-5 px-2 py-1 border-primary">
-                {classifiedProduct?.[0]}系列
+                {categoryConfig?.[classifiedProduct?.[0]]}系列
               </h3>
               <div className="row">
                 <div className="col-md-7">
