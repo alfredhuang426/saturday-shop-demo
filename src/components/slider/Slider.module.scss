@@ -8,9 +8,11 @@
 }
 
 .slides {
-    animation: slide 10s infinite;
+    animation: slide 15s infinite;
+    animation-delay: 3s;
     @media (min-width: 768px) {
-        animation: slide 8s infinite;
+        animation: slide 12s infinite;
+        animation-delay: 3s;
     }
 }
 

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Tab } from "bootstrap";
 import { Banner } from "../../components/banner/Banner";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { Product } from "../../types/products.type";
 import { categoryConfig } from "../../configs/category-config";
@@ -147,12 +147,14 @@ export const Products = () => {
                                   <div className="container px-0">
                                     <div className="row gx-2">
                                       <div className="col-6">
-                                        <button
-                                          type="button"
-                                          className="btn btn-outline-secondary w-100 h-100"
-                                        >
-                                          查看更多
-                                        </button>
+                                        <Link to={`/product/${product?.id}`}>
+                                          <button
+                                            type="button"
+                                            className="btn btn-outline-secondary w-100 h-100"
+                                          >
+                                            查看更多
+                                          </button>
+                                        </Link>
                                       </div>
                                       <div className="col-6">
                                         <button
