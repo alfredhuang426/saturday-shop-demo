@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Tab } from "bootstrap";
 import { Banner } from "../../components/banner/Banner";
-import { Link, useSearchParams } from "react-router-dom";
+import { useOutletContext, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { Product } from "../../types/products.type";
 import { categoryConfig } from "../../configs/category-config";
-import styles from "./Product.module.scss";
+import { ProductItem } from "../../components/productItem/ProductItem";
 
 export const Products = () => {
   const tab = useRef<Tab | null>(null);
@@ -14,6 +14,7 @@ export const Products = () => {
   const [classifiedProducts, setClassifiedProducts] = useState<
     Map<string, Product[]>
   >(new Map<string, Product[]>());
+  const { getCart } = useOutletContext<{ getCart: () => void }>();
 
   const getProducts = useCallback(async () => {
     setIsLoading(true);
@@ -110,65 +111,11 @@ export const Products = () => {
                       <div className="container">
                         <div className="row">
                           {classifiedProduct?.[1]?.map((product) => (
-                            <div
-                              className="col-sm-6 col-md-4 my-3"
+                            <ProductItem
+                              product={product}
+                              getCart={getCart}
                               key={product?.id}
-                            >
-                              <div className="card w-100 h-100">
-                                <img
-                                  src={product?.imageUrl}
-                                  className={`card-img-top ${styles.img}`}
-                                  alt={product?.title}
-                                />
-                                <div className="card-body d-flex flex-column align-items-center justify-content-start">
-                                  <h4 className="mb-0 text-primary">
-                                    {product?.title}
-                                  </h4>
-                                  <p className="card-text text-muted my-3">
-                                    {product?.description}
-                                  </p>
-                                  <div className="mt-auto">
-                                    <div className="mt-2 text-center d-sm-flex d-md-block d-lg-flex">
-                                      <del className="text-muted me-sm-3 me-md-0 me-lg-3">
-                                        <small>
-                                          原價：NT ${product?.price}
-                                        </small>
-                                      </del>
-                                      <p className="text-primary mb-0">
-                                        售價：
-                                        <strong>
-                                          NT ${product?.origin_price}
-                                        </strong>
-                                      </p>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="card-footer d-flex justify-content-around py-3">
-                                  <div className="container px-0">
-                                    <div className="row gx-2">
-                                      <div className="col-6">
-                                        <Link to={`/product/${product?.id}`}>
-                                          <button
-                                            type="button"
-                                            className="btn btn-outline-secondary w-100 h-100"
-                                          >
-                                            查看更多
-                                          </button>
-                                        </Link>
-                                      </div>
-                                      <div className="col-6">
-                                        <button
-                                          type="button"
-                                          className="btn btn-primary w-100 h-100 text-white"
-                                        >
-                                          加入購物車
-                                        </button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
+                            />
                           ))}
                         </div>
                       </div>

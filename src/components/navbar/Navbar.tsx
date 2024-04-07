@@ -2,9 +2,20 @@ import { FaHamburger } from "react-icons/fa";
 import styles from "./Navbar.module.scss";
 import { NavLink } from "react-router-dom";
 import { Offcanvas } from "bootstrap";
-import { useEffect, useRef } from "react";
+import { FC, useEffect, useRef } from "react";
+import { Cart } from "../../types/cart.type";
 
-export const Navbar = () => {
+type NavbarProps = {
+  cartData: Cart;
+};
+
+export const Navbar: FC<NavbarProps> = ({
+  cartData = {
+    carts: [],
+    total: 0,
+    final_total: 0,
+  },
+}) => {
   const offcanvas = useRef<Offcanvas | null>(null);
   useEffect(() => {
     offcanvas.current = new Offcanvas("#offcanvasNavbar", {
@@ -79,6 +90,9 @@ export const Navbar = () => {
                   onClick={closeOffcanvas}
                 >
                   購物車列表
+                  {cartData?.carts?.length > 0
+                    ? `(${cartData?.carts?.length})`
+                    : ""}
                 </NavLink>
               </li>
             </ul>

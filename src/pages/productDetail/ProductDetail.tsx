@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 import { Product } from "../../types/products.type";
 import axios from "axios";
 import styles from "./ProductDetail.module.scss";
@@ -22,6 +22,8 @@ export const ProductDetail = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [isProductLoading, setIsProductLoading] = useState(true);
   const [isAllProductLoading, setIsAllProductLoading] = useState(true);
+  const { getCart } = useOutletContext<{ getCart: () => void }>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const { id } = useParams();
 
@@ -49,6 +51,26 @@ export const ProductDetail = () => {
       console.log(error);
     }
     setIsAllProductLoading(false);
+  };
+
+  const addToCart = async () => {
+    try {
+      setIsLoading(true);
+      const addToCartResult = await axios.post(
+        `/v2/api/${process.env.REACT_APP_API_PATH}/cart`,
+        {
+          data: {
+            product_id: product?.id,
+            qty: cartQuantity,
+          },
+        }
+      );
+      setIsLoading(false);
+      getCart();
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -135,8 +157,18 @@ export const ProductDetail = () => {
                       <button
                         type="button"
                         className="btn btn-primary w-100 h-100 text-white"
+                        onClick={addToCart}
+                        disabled={isLoading}
                       >
-                        加入購物車
+                        {isLoading && (
+                          <div
+                            className="spinner-border text-white spinner-border-sm"
+                            role="status"
+                          >
+                            <span className="visually-hidden">Loading...</span>
+                          </div>
+                        )}
+                        {!isLoading && "加入購物車"}
                       </button>
                     </div>
                   </div>

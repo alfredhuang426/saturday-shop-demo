@@ -1,0 +1,68 @@
+@import "bootstrap/scss/functions";
+
+@import "../../styles/variables";
+
+.steps {
+    display: flex;
+    list-style: none;
+    padding-left: 0px;
+    justify-content: space-between; /* 按水平均匀分布，行首行尾两端靠齐 */
+    margin: 0;
+    counter-reset: steps; /* 声明counter变量，名为 steps */
+}
+
+.step {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    &:before {
+        content: "";
+        width: 2.5rem; /* 步骤圆的宽 */
+        height: 2.5rem; /* 步骤圆的高 */
+        background: #bcbcbc; /* 里面的小圆 */
+        border-radius: 50%; /* 设置形状为原型 */
+        margin: 1rem; /* 没有设置margin的话，会位置不正确，因为投影不占用位置，而这里投影确实需要占用，所以手动给margin */
+        display: block; /* 需要设置为块级 不然不生效*/
+        counter-increment: steps; /* 使 steps 自增 */
+        content: counter(steps); /* 修改content的内容为steps的值 */
+
+        /* 使 步骤数字水平垂直居中，并设置字号 */
+        display: flex;
+        color: white;
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;
+        z-index: 10;
+    }
+
+    &:nth-child(n + 2) {
+        &:after {
+            content: "";
+            height: 0.3rem;
+            width: 100%;
+            background: #bcbcbc;
+            position: absolute;
+            left: -50%; /* 刚好以圆中心从右往左 */
+        }
+    }
+
+    &.active {
+        &:before {
+            background-color: $primary;
+        }
+        &:nth-child(n + 2) {
+            &:after {
+                background-color: $primary;
+            }
+        }
+    }
+}
+
+.step-detail {
+    position: absolute; /* 定位位置 */
+    bottom: -1rem;
+    left: 50%;
+    transform: translateX(-50%); /* 水平居中 */
+}
