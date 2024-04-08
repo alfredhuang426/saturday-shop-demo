@@ -44,11 +44,11 @@ export const ProductItem: FC<ProductItemrProps> = ({ product, getCart }) => {
           <div className="mt-auto">
             <div className="mt-2 text-center d-sm-flex d-md-block d-lg-flex">
               <del className="text-muted me-sm-3 me-md-0 me-lg-3">
-                <small>原價： NT ${product?.price}</small>
+                <small>原價： NT ${product?.origin_price}</small>
               </del>
               <p className="text-primary mb-0">
                 售價：
-                <strong>NT ${product?.origin_price}</strong>
+                <strong>NT ${product?.price}</strong>
               </p>
             </div>
           </div>

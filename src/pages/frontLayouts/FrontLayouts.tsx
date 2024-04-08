@@ -11,17 +11,19 @@ export const FrontLayouts = () => {
     final_total: 0,
     total: 0,
   });
+  const [isCartDataLoading, setIsCartDataLoading] = useState<boolean>(false);
 
   const getCart = async () => {
+    setIsCartDataLoading(true);
     try {
       const getCartResult = await axios.get(
         `/v2/api/${process.env.REACT_APP_API_PATH}/cart`
       );
-      console.log(getCartResult?.data?.data);
       setCartData(getCartResult?.data?.data);
     } catch (error) {
       console.log(error);
     }
+    setIsCartDataLoading(false);
   };
 
   useEffect(() => {
@@ -33,7 +35,7 @@ export const FrontLayouts = () => {
       <div
         style={{ marginTop: "62px", minHeight: "calc(100vh - 62px - 190px)" }}
       >
-        <Outlet context={{ getCart, cartData }}></Outlet>
+        <Outlet context={{ getCart, cartData,isCartDataLoading }}></Outlet>
       </div>
       <Footer />
     </>

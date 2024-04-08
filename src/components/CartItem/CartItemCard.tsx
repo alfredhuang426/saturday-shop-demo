@@ -1,17 +1,17 @@
-import { FC, useCallback, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { CartItem } from "../../types/cart.type";
-import styles from "./CartTableRow.module.scss";
-import { FaRegTrashAlt } from "react-icons/fa";
+import styles from "./CardItemCard.module.scss";
 import { NumberInputGroup } from "../numberInputGroup/NumberInputGroup";
+import { FaRegTrashAlt } from "react-icons/fa";
 import { useDebounce } from "../../custom-hooks/useDebounce";
 import axios from "axios";
 
-type CartTableRowProps = {
+type CartItemCardProps = {
   cartItem: CartItem;
   getCart: () => void;
 };
 
-export const CartTableRow: FC<CartTableRowProps> = ({ cartItem, getCart }) => {
+export const CartItemCard: FC<CartItemCardProps> = ({ cartItem,getCart }) => {
   const [cartQuantity, setCartQuantity] = useState(cartItem?.qty);
   const debounceCartQuantity = useDebounce(cartQuantity, 1000);
   const isButtonClicked = useRef(false);
@@ -52,31 +52,30 @@ export const CartTableRow: FC<CartTableRowProps> = ({ cartItem, getCart }) => {
   }, [debounceCartQuantity, cartItem.id]);
 
   return (
-    <tr>
-      <td className="align-middle py-3" width="50%">
+    <div className={`my-3 px-3 py-3 ${styles["box-shadow"]}`}>
+      <div className="d-flex align-items-center mb-3">
         <img
           src={cartItem?.product?.imageUrl}
           alt={cartItem?.product?.title}
           className={`${styles.img}`}
         />
         <span className="ms-3">{cartItem?.product?.title}</span>
-      </td>
-      <td className="align-middle" width="20%">
+        <span className="ms-auto">NT${cartItem?.final_total}</span>
+      </div>
+      <div className="d-flex">
         <NumberInputGroup
           quantity={cartQuantity}
           setQuantity={setCartQuantity}
           isReadOnly={true}
           isButtonClicked={isButtonClicked}
         />
-      </td>
-      <td className="align-middle text-center" width="20%">
-        NT${cartItem?.final_total}
-      </td>
-      <td className="align-middle text-center" width="10%">
-        <button type="button" className="btn border-0" onClick={removeCartItem}>
-          <FaRegTrashAlt className="text-primary" />
+        <button
+          type="button"
+          className={`btn btn-outline-primary ms-5 text-primary ${styles["custom-button"]}`}
+        >
+          <FaRegTrashAlt />
         </button>
-      </td>
-    </tr>
+      </div>
+    </div>
   );
 };

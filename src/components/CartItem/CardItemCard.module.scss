@@ -1,0 +1,14 @@
+.img {
+    width: 72px;
+    height: 72px;
+}
+
+.box-shadow {
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.16);
+}
+
+.custom-button {
+    &:hover {
+        color: white !important;
+    }
+}
