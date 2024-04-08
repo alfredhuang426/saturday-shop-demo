@@ -1,10 +1,10 @@
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Stepbar } from "../../components/stepbar/Stepbar";
 import { Product } from "../../types/products.type";
 import axios from "axios";
 import { Slider } from "../../components/slider/Slider";
 import { CartTableRow } from "../../components/cartTableRow/CartTableRow";
-import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import { Cart as CartType } from "../../types/cart.type";
 import { CartItemCard } from "../../components/CartItem/CartItemCard";
 import styles from "./Cart.module.scss";
@@ -121,12 +121,14 @@ export const Cart = () => {
                 </table>
               </div>
               <div className="text-end mb-5 pe-4">
-                <button
-                  type="button"
-                  className={`btn btn-outline-primary px-5 ${styles["custom-button"]}`}
-                >
-                  下一步
-                </button>
+                <Link to={`/profile`}>
+                  <button
+                    type="button"
+                    className={`btn btn-outline-primary px-5 ${styles["custom-button"]}`}
+                  >
+                    下一步
+                  </button>
+                </Link>
               </div>
             </div>
           </>

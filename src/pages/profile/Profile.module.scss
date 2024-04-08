@@ -1,0 +1,14 @@
+.resize-none {
+    resize: none;
+}
+
+.img {
+    width: 60px;
+    height: 40px;
+}
+
+.custom-button {
+    &:hover {
+        color: white !important;
+    }
+}
