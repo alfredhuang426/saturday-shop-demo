@@ -6,6 +6,7 @@ import {
   FaLine,
 } from "react-icons/fa";
 import styles from "./Footer.module.scss";
+import { Link } from "react-router-dom";
 
 export const Footer = () => {
   return (
@@ -17,15 +18,15 @@ export const Footer = () => {
             <h1 className="h3 mb-0 px-2 text-white">Saturday's</h1>
           </span>
           <span className="d-flex">
-            <a className="h3 mb-0 px-2" href="#">
+            <Link className="h3 mb-0 px-2" to="/">
               <FaFacebook />
-            </a>
-            <a className="h3 mb-0 px-2" href="#">
+            </Link>
+            <Link className="h3 mb-0 px-2" to="/">
               <FaLine />
-            </a>
-            <a className="h3 mb-0 px-2" href="#">
+            </Link>
+            <Link className="h3 mb-0 px-2" to="/">
               <FaInstagram />
-            </a>
+            </Link>
           </span>
         </div>
         <div className="d-md-flex justify-content-between align-items-center">

@@ -1,0 +1,18 @@
+.control-input-button {
+    &:hover {
+        color: white !important;
+    }
+}
+
+/*去除number輸入框有右邊上下箭頭按鈕*/
+/* Chrome, Safari, Edge, Opera */
+.custom-input::-webkit-outer-spin-button,
+.custom-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+.custom-input {
+    -moz-appearance: textfield;
+}

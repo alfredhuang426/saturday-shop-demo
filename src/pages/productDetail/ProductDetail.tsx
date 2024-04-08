@@ -4,6 +4,7 @@ import { Product } from "../../types/products.type";
 import axios from "axios";
 import styles from "./ProductDetail.module.scss";
 import { Slider } from "../../components/slider/Slider";
+import { NumberInputGroup } from "../../components/numberInputGroup/NumberInputGroup";
 
 export const ProductDetail = () => {
   const [product, setProduct] = useState<Product>({
@@ -119,39 +120,7 @@ export const ProductDetail = () => {
                 <div className="container mt-3">
                   <div className="row">
                     <div className="col-6">
-                      <div className="input-group">
-                        <button
-                          className={`btn btn-outline-primary px-3 fs-6 fw-bold ${styles["control-input-button"]}`}
-                          type="button"
-                          id="button-addon1"
-                          onClick={() => {
-                            setCartQuantity((pre) =>
-                              pre === 1 ? pre : pre - 1
-                            );
-                          }}
-                        >
-                          -
-                        </button>
-                        <input
-                          type="number"
-                          className={`form-control border border-primary text-center ${styles["custom-input"]}`}
-                          min={1}
-                          value={cartQuantity}
-                          onChange={(e) => {
-                            setCartQuantity(+e.target.value);
-                          }}
-                        />
-                        <button
-                          className={`btn btn-outline-primary px-3 fs-6 fw-bold ${styles["control-input-button"]}`}
-                          type="button"
-                          id="button-addon2"
-                          onClick={() => {
-                            setCartQuantity((pre) => pre + 1);
-                          }}
-                        >
-                          +
-                        </button>
-                      </div>
+                      <NumberInputGroup quantity={cartQuantity} setQuantity={setCartQuantity} />
                     </div>
                     <div className="col-6 pe-0">
                       <button

@@ -6,24 +6,6 @@
     object-fit: cover;
 }
 
-.control-input-button {
-    &:hover {
-        color: white !important;
-    }
-}
-
-/* Chrome, Safari, Edge, Opera */
-.custom-input::-webkit-outer-spin-button,
-.custom-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-/* Firefox */
-.custom-input {
-    -moz-appearance: textfield;
-}
-
 .content {
     text-wrap: wrap;
 }

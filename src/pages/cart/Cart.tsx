@@ -3,10 +3,18 @@ import { Stepbar } from "../../components/stepbar/Stepbar";
 import { Product } from "../../types/products.type";
 import axios from "axios";
 import { Slider } from "../../components/slider/Slider";
+import { CartTableRow } from "../../components/cartTableRow/CartTableRow";
+import { useOutletContext } from "react-router-dom";
+import { Cart as CartType } from "../../types/cart.type";
 
 export const Cart = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [isAllProductsLoading, setIsAllProductsLoading] = useState(true);
+  const { getCart, cartData } = useOutletContext<{
+    getCart: () => void;
+    cartData: CartType;
+  }>();
+
   const getProducts = async () => {
     setIsAllProductsLoading(true);
     try {
@@ -37,30 +45,21 @@ export const Cart = () => {
                 <th scope="col" className="bg-primary text-white">
                   品項
                 </th>
-                <th scope="col" className="bg-primary text-white">
+                <th scope="col" className="bg-primary text-white text-center">
                   數量
                 </th>
-                <th scope="col" className="bg-primary text-white">
+                <th scope="col" className="bg-primary text-white text-center">
                   價格
                 </th>
-                <th scope="col" className="bg-primary text-white">
+                <th scope="col" className="bg-primary text-white text-center">
                   刪除
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1wefrgthyjukl,mhdfgbnmhrgdfgnmjtrdfgbn</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
+              {cartData.carts.map((cart, index) => {
+                return <CartTableRow cartItem={cart} key={index} />;
+              })}
             </tbody>
           </table>
         </div>
