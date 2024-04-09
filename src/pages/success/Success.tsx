@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Stepbar } from "../../components/stepbar/Stepbar";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Order } from "../../types/order.type";
-import styles from "./Success.module.scss";
-import { FaCopy } from "react-icons/fa";
 import { OrderDetail } from "../../components/orderDetail/OrderDetail";
 
 export const Success = () => {

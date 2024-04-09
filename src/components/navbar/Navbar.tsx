@@ -72,7 +72,7 @@ export const Navbar: FC<NavbarProps> = ({
             ></button>
           </div>
           <div className="offcanvas-body bg-primary">
-            <ul className="navbar-nav justify-content-between flex-grow-1 pe-3">
+            <ul className="navbar-nav justify-content-start flex-grow-1 pe-3">
               <li className="nav-item">
                 <NavLink
                   className="nav-link active fs-6"
@@ -84,6 +84,16 @@ export const Navbar: FC<NavbarProps> = ({
                 </NavLink>
               </li>
               <li className="nav-item">
+                <NavLink
+                  className="nav-link active fs-6"
+                  aria-current="page"
+                  to="/orderSearch"
+                  onClick={closeOffcanvas}
+                >
+                  訂單查詢
+                </NavLink>
+              </li>
+              <li className="nav-item ms-md-auto">
                 <NavLink
                   className="nav-link active fs-6"
                   to="/cart"

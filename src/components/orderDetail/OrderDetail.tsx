@@ -4,7 +4,7 @@ import { FC } from "react";
 import { Order } from "../../types/order.type";
 
 type OrderDetailProps = {
-  orderData: Order;
+  orderData: Order | null;
 };
 
 export const OrderDetail: FC<OrderDetailProps> = ({ orderData }) => {
