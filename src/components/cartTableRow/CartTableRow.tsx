@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { CartItem } from "../../types/cart.type";
 import styles from "./CartTableRow.module.scss";
 import { FaRegTrashAlt } from "react-icons/fa";

@@ -1,24 +1,54 @@
-import { Link, useOutletContext } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import { Stepbar } from "../../components/stepbar/Stepbar";
 import styles from "./Profile.module.scss";
 import { Cart } from "../../types/cart.type";
 import { useForm } from "react-hook-form";
-import { Form } from "../../types/form.type";
+import { User } from "../../types/User.type";
 import { Input } from "../../components/input/Input";
+import { Textarea } from "../../components/textarea/Textarea";
+import axios from "axios";
+import { useState } from "react";
 
 export const Profile = () => {
-  const { cartData, isCartDataLoading } = useOutletContext<{
+  const { cartData, isCartDataLoading, getCart } = useOutletContext<{
     cartData: Cart;
     isCartDataLoading: boolean;
+    getCart: () => void;
   }>();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Form>();
+  } = useForm<User>();
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = async (data: Form) => {
-    console.log(data);
+  const onSubmit = async (data: User) => {
+    const { name, email, tel, address, message } = data;
+    const form = {
+      data: {
+        user: {
+          name,
+          email,
+          tel,
+          address,
+        },
+        message: message,
+      },
+    };
+    try {
+      setIsLoading(true);
+      const res = await axios.post(
+        `/v2/api/${process.env.REACT_APP_API_PATH}/order`,
+        form
+      );
+      navigate(`/success/${res.data.orderId}`);
+      setIsLoading(false);
+      getCart();
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -74,10 +104,6 @@ export const Profile = () => {
             <hr></hr>
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
               <div className="form-group my-3">
-                <label htmlFor="email" className="form-label">
-                  <span className="text-danger">*</span>
-                  電子郵件
-                </label>
                 <Input
                   labelText="電子郵件"
                   type="email"
@@ -86,60 +112,69 @@ export const Profile = () => {
                   errors={errors}
                   register={register}
                   rules={{
-                    required: "Email 為必填",
+                    required: "Email為必填",
                     pattern: {
                       value: /^\S+@\S+$/i,
-                      message: "Email 格式不正確",
+                      message: "Email格式不正確",
                     },
                   }}
                 />
               </div>
               <div className="form-group my-3">
-                <label htmlFor="name" className="form-label">
-                  <span className="text-danger">*</span>
-                  訂購人姓名
-                </label>
-                <input
+                <Input
+                  labelText="訂購人姓名"
                   type="text"
-                  className="form-control"
                   id="name"
                   placeholder="請輸入訂購人姓名"
+                  errors={errors}
+                  register={register}
+                  rules={{
+                    required: "訂購人姓名為必填",
+                  }}
                 />
               </div>
               <div className="form-group my-3">
-                <label htmlFor="tel" className="form-label">
-                  <span className="text-danger">*</span>
-                  電話
-                </label>
-                <input
+                <Input
+                  labelText="電話"
                   type="tel"
-                  className="form-control"
                   id="tel"
                   placeholder="請輸入電話"
+                  errors={errors}
+                  register={register}
+                  rules={{
+                    required: "電話為必填",
+                    minLength: {
+                      value: 6,
+                      message: "電話不少於 6 碼",
+                    },
+                    maxLength: {
+                      value: 12,
+                      message: "電話不超過 12 碼",
+                    },
+                  }}
                 />
               </div>
               <div className="form-group my-3">
-                <label htmlFor="address" className="form-label">
-                  <span className="text-danger">*</span>
-                  地址
-                </label>
-                <input
+                <Input
+                  labelText="地址"
                   type="text"
-                  className="form-control"
                   id="address"
                   placeholder="請輸入地址"
+                  errors={errors}
+                  register={register}
+                  rules={{
+                    required: "地址為必填",
+                  }}
                 />
               </div>
               <div className="form-group my-3">
-                <label htmlFor="message" className="form-label">
-                  其他需求
-                </label>
-                <textarea
-                  className={`form-control ${styles["resize-none"]}`}
+                <Textarea
+                  labelText="其他需求"
                   id="message"
-                  rows={5}
                   placeholder="如果有其他需求，請留言告知我們"
-                ></textarea>
+                  register={register}
+                  rows={5}
+                />
               </div>
               <div className="d-flex justify-content-between">
                 <Link to={`/cart`}>
@@ -153,8 +188,17 @@ export const Profile = () => {
                 <button
                   type="submit"
                   className={`btn btn-outline-primary px-5 ${styles["custom-button"]}`}
+                  disabled={isLoading}
                 >
-                  下一步
+                  {isLoading && (
+                    <div
+                      className="spinner-border text-primary spinner-border-sm"
+                      role="status"
+                    >
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                  )}
+                  {!isLoading && "下一步"}
                 </button>
               </div>
             </form>

@@ -1,15 +1,15 @@
 import { FC } from "react";
 import { FieldErrors, RegisterOptions, UseFormRegister } from "react-hook-form";
-import { Form } from "../../types/form.type";
+import { User } from "../../types/User.type";
 
 type InputProps = {
-  id: "name" | "email" | "tel" | "address" | "message";
+  id: "name" | "email" | "tel" | "address";
   placeholder: string;
   labelText: string;
-  register: UseFormRegister<Form>;
+  register: UseFormRegister<User>;
   type: string;
-  errors: FieldErrors<Form>;
-  rules?: RegisterOptions<Form>;
+  errors: FieldErrors<User>;
+  rules?: RegisterOptions<User>;
 };
 
 export const Input: FC<InputProps> = ({

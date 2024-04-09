@@ -1,4 +1,4 @@
-export type Form = {
+export type User = {
   name: string;
   email: string;
   tel: string;
