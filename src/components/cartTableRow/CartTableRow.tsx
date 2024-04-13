@@ -15,13 +15,19 @@ export const CartTableRow: FC<CartTableRowProps> = ({ cartItem, getCart }) => {
   const [cartQuantity, setCartQuantity] = useState(cartItem?.qty);
   const debounceCartQuantity = useDebounce(cartQuantity, 1000);
   const isButtonClicked = useRef(false);
+  const [isUpdateLoading, setIsUpdateLoading] = useState(false);
+  const [isRemoveLoading, setIsRemoveLoading] = useState(false);
 
   const removeCartItem = async () => {
     try {
       const result = await axios.delete(
         `/v2/api/${process.env.REACT_APP_API_PATH}/cart/${cartItem?.id}`
       );
-      getCart();
+      (async () => {
+        setIsRemoveLoading(true);
+        await getCart();
+        setIsRemoveLoading(false);
+      })();
     } catch (error) {
       console.log(error);
     }
@@ -40,7 +46,11 @@ export const CartTableRow: FC<CartTableRowProps> = ({ cartItem, getCart }) => {
           `/v2/api/${process.env.REACT_APP_API_PATH}/cart/${cartItem?.id}`,
           data
         );
-        getCart();
+        (async () => {
+          setIsUpdateLoading(true);
+          await getCart();
+          setIsUpdateLoading(false);
+        })();
       } catch (error) {
         console.log(error);
       }
@@ -62,20 +72,42 @@ export const CartTableRow: FC<CartTableRowProps> = ({ cartItem, getCart }) => {
         <span className="ms-3">{cartItem?.product?.title}</span>
       </td>
       <td className="align-middle" width="20%">
-        <NumberInputGroup
-          quantity={cartQuantity}
-          setQuantity={setCartQuantity}
-          isReadOnly={true}
-          isButtonClicked={isButtonClicked}
-        />
+        {isUpdateLoading && (
+          <div className="d-flex justify-content-center">
+            <div className="spinner-border text-primary" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        )}
+        {!isUpdateLoading && (
+          <NumberInputGroup
+            quantity={cartQuantity}
+            setQuantity={setCartQuantity}
+            isReadOnly={true}
+            isButtonClicked={isButtonClicked}
+          />
+        )}
       </td>
       <td className="align-middle text-center" width="20%">
         NT${cartItem?.final_total}
       </td>
       <td className="align-middle text-center" width="10%">
-        <button type="button" className="btn border-0" onClick={removeCartItem}>
-          <FaRegTrashAlt className="text-primary" />
-        </button>
+        {isRemoveLoading && (
+          <div className="d-flex justify-content-center">
+            <div className="spinner-border text-primary" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        )}
+        {!isRemoveLoading && (
+          <button
+            type="button"
+            className="btn border-0"
+            onClick={removeCartItem}
+          >
+            <FaRegTrashAlt className="text-primary" />
+          </button>
+        )}
       </td>
     </tr>
   );

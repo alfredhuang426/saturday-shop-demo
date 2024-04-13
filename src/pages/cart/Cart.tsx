@@ -12,10 +12,10 @@ import styles from "./Cart.module.scss";
 export const Cart = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [isAllProductsLoading, setIsAllProductsLoading] = useState(true);
-  const { getCart, cartData, isCartDataLoading } = useOutletContext<{
+  const [isCartDataLoading, setIsCartDataLoading] = useState(true);
+  const { getCart, cartData } = useOutletContext<{
     getCart: () => void;
     cartData: CartType;
-    isCartDataLoading: boolean;
   }>();
 
   const getProducts = async () => {
@@ -30,6 +30,14 @@ export const Cart = () => {
     }
     setIsAllProductsLoading(false);
   };
+
+  useEffect(() => {
+    (async () => {
+      setIsCartDataLoading(true);
+      await getCart();
+      setIsCartDataLoading(false);
+    })();
+  }, []);
 
   useEffect(() => {
     getProducts();
@@ -70,7 +78,7 @@ export const Cart = () => {
                 </div>
               </div>
               <div className="d-none d-md-block">
-                <table className="table mt-3 mb-3 d-none d-md-block">
+                <table className="table mt-3 mb-3">
                   <thead>
                     <tr>
                       <th scope="col" className="bg-primary text-white">

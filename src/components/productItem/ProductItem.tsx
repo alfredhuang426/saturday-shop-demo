@@ -33,26 +33,28 @@ export const ProductItem: FC<ProductItemrProps> = ({ product, getCart }) => {
   return (
     <div className="col-sm-6 col-md-4 my-3" key={product?.id}>
       <div className="card w-100 h-100">
-        <img
-          src={product?.imageUrl}
-          className={`card-img-top ${styles.img}`}
-          alt={product?.title}
-        />
-        <div className="card-body d-flex flex-column align-items-center justify-content-start">
-          <h4 className="mb-0 text-primary">{product?.title}</h4>
-          <p className="card-text text-muted my-3">{product?.description}</p>
-          <div className="mt-auto">
-            <div className="mt-2 text-center d-sm-flex d-md-block d-lg-flex">
-              <del className="text-muted me-sm-3 me-md-0 me-lg-3">
-                <small>原價： NT ${product?.origin_price}</small>
-              </del>
-              <p className="text-primary mb-0">
-                售價：
-                <strong>NT ${product?.price}</strong>
-              </p>
+        <Link to={`/product/${product?.id}`} className="text-decoration-none">
+          <img
+            src={product?.imageUrl}
+            className={`card-img-top ${styles.img}`}
+            alt={product?.title}
+          />
+          <div className="card-body d-flex flex-column align-items-center justify-content-start">
+            <h4 className="mb-0 text-primary">{product?.title}</h4>
+            <p className="card-text text-muted my-3">{product?.description}</p>
+            <div className="mt-auto">
+              <div className="mt-2 text-center d-sm-flex d-md-block d-lg-flex">
+                <del className="text-muted me-sm-3 me-md-0 me-lg-3">
+                  <small>原價： NT ${product?.origin_price}</small>
+                </del>
+                <p className="text-primary mb-0">
+                  售價：
+                  <strong>NT ${product?.price}</strong>
+                </p>
+              </div>
             </div>
           </div>
-        </div>
+        </Link>
         <div className="card-footer d-flex justify-content-around py-3">
           <div className="container px-0">
             <div className="row gx-2">

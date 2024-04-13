@@ -32,29 +32,30 @@ export const Slider: FC<SliderProps> = ({
           <div className={styles.slider}>
             <div className={`${styles.slides} d-md-flex`}>
               {shownProducts.map((product) => (
-                <div className={styles.slide} key={product?.id}>
-                  <img
-                    className={styles.img}
-                    src={product?.imageUrl}
-                    alt={product?.title}
-                  />
-                  <div className="text-center">
-                    <h4 className={`mb-1 mt-3 text-dark ${styles.h4}`}>
-                      <Link
-                        className="text-dark text-decoration-none"
-                        to={`/product/${product?.id}`}
-                      >
+                <Link
+                  to={`/product/${product?.id}`}
+                  className="text-dark text-decoration-none"
+                  key={product?.id}
+                >
+                  <div className={styles.slide}>
+                    <img
+                      className={styles.img}
+                      src={product?.imageUrl}
+                      alt={product?.title}
+                    />
+                    <div className="text-center">
+                      <h4 className={`mb-1 mt-3 text-dark ${styles.h4}`}>
                         {product?.title}
-                      </Link>
-                    </h4>
-                    <p className="mb-0">
-                      NT${product?.price}
-                      <span className="text-muted px-2">
-                        <del>NT${product?.origin_price}</del>
-                      </span>
-                    </p>
+                      </h4>
+                      <p className="mb-0">
+                        NT${product?.price}
+                        <span className="text-muted px-2">
+                          <del>NT${product?.origin_price}</del>
+                        </span>
+                      </p>
+                    </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
