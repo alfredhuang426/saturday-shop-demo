@@ -5,23 +5,33 @@ import { NumberInputGroup } from "../numberInputGroup/NumberInputGroup";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useDebounce } from "../../custom-hooks/useDebounce";
 import axios from "axios";
+import { notificationActions } from "../../store/notificationSlice";
+import { useDispatch } from "react-redux";
 
 type CartItemCardProps = {
   cartItem: CartItem;
   getCart: () => void;
 };
 
-export const CartItemCard: FC<CartItemCardProps> = ({ cartItem,getCart }) => {
-  const [cartQuantity, setCartQuantity] = useState(cartItem?.qty);
+export const CartItemCard: FC<CartItemCardProps> = ({ cartItem, getCart }) => {
+  const [cartQuantity, setCartQuantity] = useState(1);
   const debounceCartQuantity = useDebounce(cartQuantity, 1000);
   const isButtonClicked = useRef(false);
+  const dispatch = useDispatch();
 
   const removeCartItem = async () => {
     try {
       const result = await axios.delete(
         `/v2/api/${process.env.REACT_APP_API_PATH}/cart/${cartItem?.id}`
       );
-      getCart();
+      await getCart();
+      dispatch(
+        notificationActions.createMessage({
+          success: result?.data?.success,
+          id: result?.data?.data?.product_id,
+          message: result?.data?.message,
+        })
+      );
     } catch (error) {
       console.log(error);
     }
@@ -40,7 +50,14 @@ export const CartItemCard: FC<CartItemCardProps> = ({ cartItem,getCart }) => {
           `/v2/api/${process.env.REACT_APP_API_PATH}/cart/${cartItem?.id}`,
           data
         );
-        getCart();
+        await getCart();
+        dispatch(
+          notificationActions.createMessage({
+            success: result?.data?.success,
+            id: result?.data?.data.product_id,
+            message: result?.data?.message,
+          })
+        );
       } catch (error) {
         console.log(error);
       }
@@ -50,6 +67,10 @@ export const CartItemCard: FC<CartItemCardProps> = ({ cartItem,getCart }) => {
       isButtonClicked.current = false;
     }
   }, [debounceCartQuantity, cartItem.id]);
+
+  useEffect(() => {
+    setCartQuantity(cartItem?.qty);
+  }, [cartItem]);
 
   return (
     <div className={`my-3 px-3 py-3 ${styles["box-shadow"]}`}>
@@ -69,11 +90,8 @@ export const CartItemCard: FC<CartItemCardProps> = ({ cartItem,getCart }) => {
           isReadOnly={true}
           isButtonClicked={isButtonClicked}
         />
-        <button
-          type="button"
-          className={`btn btn-outline-primary ms-5 text-primary ${styles["custom-button"]}`}
-        >
-          <FaRegTrashAlt />
+        <button type="button" className="btn border-0" onClick={removeCartItem}>
+          <FaRegTrashAlt className="text-primary" />
         </button>
       </div>
     </div>

@@ -5,6 +5,8 @@ import axios from "axios";
 import styles from "./ProductDetail.module.scss";
 import { Slider } from "../../components/slider/Slider";
 import { NumberInputGroup } from "../../components/numberInputGroup/NumberInputGroup";
+import { useDispatch } from "react-redux";
+import { notificationActions } from "../../store/notificationSlice";
 
 export const ProductDetail = () => {
   const [product, setProduct] = useState<Product>({
@@ -25,6 +27,7 @@ export const ProductDetail = () => {
   const [isAllProductLoading, setIsAllProductLoading] = useState(true);
   const { getCart } = useOutletContext<{ getCart: () => void }>();
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const { id } = useParams();
 
@@ -67,6 +70,13 @@ export const ProductDetail = () => {
         }
       );
       setIsLoading(false);
+      dispatch(
+        notificationActions.createMessage({
+          success: addToCartResult?.data?.success,
+          id: addToCartResult?.data?.data?.product_id,
+          message: addToCartResult?.data?.message,
+        })
+      );
       getCart();
     } catch (error) {
       console.log(error);

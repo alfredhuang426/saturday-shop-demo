@@ -4,6 +4,7 @@ import { Footer } from "../../components/footer/Footer";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Cart } from "../../types/cart.type";
+import { MessageToast } from "../../components/messageToast/MessageToast";
 
 export const FrontLayouts = () => {
   const [cartData, setCartData] = useState<Cart>({
@@ -28,6 +29,7 @@ export const FrontLayouts = () => {
   }, []);
   return (
     <>
+      <MessageToast />
       <Navbar cartData={cartData} />
       <div
         style={{ marginTop: "62px", minHeight: "calc(100vh - 62px - 190px)" }}

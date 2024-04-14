@@ -3,6 +3,8 @@ import { Product } from "../../types/products.type";
 import styles from "./ProductItem.module.scss";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { notificationActions } from "../../store/notificationSlice";
 
 type ProductItemrProps = {
   product: Product;
@@ -11,6 +13,8 @@ type ProductItemrProps = {
 
 export const ProductItem: FC<ProductItemrProps> = ({ product, getCart }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+
   const addToCart = async () => {
     try {
       setIsLoading(true);
@@ -24,6 +28,13 @@ export const ProductItem: FC<ProductItemrProps> = ({ product, getCart }) => {
         }
       );
       setIsLoading(false);
+      dispatch(
+        notificationActions.createMessage({
+          success: addToCartResult?.data?.success,
+          id: addToCartResult?.data?.data?.product_id,
+          message: addToCartResult?.data?.message,
+        })
+      );
       getCart();
     } catch (error) {
       console.log(error);
@@ -39,7 +50,7 @@ export const ProductItem: FC<ProductItemrProps> = ({ product, getCart }) => {
             className={`card-img-top ${styles.img}`}
             alt={product?.title}
           />
-          <div className="card-body d-flex flex-column align-items-center justify-content-start">
+          <div className={`card-body d-flex flex-column align-items-center justify-content-start ${styles["card-body"]}`}>
             <h4 className="mb-0 text-primary">{product?.title}</h4>
             <p className="card-text text-muted my-3">{product?.description}</p>
             <div className="mt-auto">

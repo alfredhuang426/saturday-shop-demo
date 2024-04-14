@@ -6,3 +6,12 @@
     }
     object-fit: cover;
 }
+
+.card-body {
+    @media (min-width: 576px) {
+        min-height: 250px;
+    }
+    @media (min-width: 992px) {
+        min-height: 200px;
+    }
+}

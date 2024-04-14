@@ -6,6 +6,8 @@ import "./styles/all.scss";
 import reportWebVitals from "./reportWebVitals";
 import { HashRouter } from "react-router-dom";
 import axios from "axios";
+import { Provider } from "react-redux";
+import store from "./store";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
@@ -15,7 +17,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <HashRouter>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </HashRouter>
   </React.StrictMode>
 );

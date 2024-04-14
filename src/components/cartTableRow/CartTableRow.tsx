@@ -5,6 +5,8 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { NumberInputGroup } from "../numberInputGroup/NumberInputGroup";
 import { useDebounce } from "../../custom-hooks/useDebounce";
 import axios from "axios";
+import { notificationActions } from "../../store/notificationSlice";
+import { useDispatch } from "react-redux";
 
 type CartTableRowProps = {
   cartItem: CartItem;
@@ -12,11 +14,14 @@ type CartTableRowProps = {
 };
 
 export const CartTableRow: FC<CartTableRowProps> = ({ cartItem, getCart }) => {
-  const [cartQuantity, setCartQuantity] = useState(cartItem?.qty);
+  const [cartQuantity, setCartQuantity] = useState(1);
   const debounceCartQuantity = useDebounce(cartQuantity, 1000);
   const isButtonClicked = useRef(false);
   const [isUpdateLoading, setIsUpdateLoading] = useState(false);
   const [isRemoveLoading, setIsRemoveLoading] = useState(false);
+  const dispatch = useDispatch();
+
+  console.log(cartItem);
 
   const removeCartItem = async () => {
     try {
@@ -27,6 +32,13 @@ export const CartTableRow: FC<CartTableRowProps> = ({ cartItem, getCart }) => {
         setIsRemoveLoading(true);
         await getCart();
         setIsRemoveLoading(false);
+        dispatch(
+          notificationActions.createMessage({
+            success: result?.data?.success,
+            id: result?.data?.data?.product_id,
+            message: result?.data?.message,
+          })
+        );
       })();
     } catch (error) {
       console.log(error);
@@ -50,6 +62,13 @@ export const CartTableRow: FC<CartTableRowProps> = ({ cartItem, getCart }) => {
           setIsUpdateLoading(true);
           await getCart();
           setIsUpdateLoading(false);
+          dispatch(
+            notificationActions.createMessage({
+              success: result?.data?.success,
+              id: result?.data?.data.product_id,
+              message: result?.data?.message,
+            })
+          );
         })();
       } catch (error) {
         console.log(error);
@@ -60,6 +79,10 @@ export const CartTableRow: FC<CartTableRowProps> = ({ cartItem, getCart }) => {
       isButtonClicked.current = false;
     }
   }, [debounceCartQuantity, cartItem.id]);
+
+  useEffect(() => {
+    setCartQuantity(cartItem?.qty);
+  }, [cartItem]);
 
   return (
     <tr>

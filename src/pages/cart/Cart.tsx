@@ -73,7 +73,7 @@ export const Cart = () => {
                   );
                 })}
                 <div className="fs-5 mb-3 text-end pe-4">
-                  總和:{" "}
+                  總和:
                   <span className="fw-bold">NT${cartData?.final_total}</span>
                 </div>
               </div>
