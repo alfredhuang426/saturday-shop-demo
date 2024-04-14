@@ -53,7 +53,7 @@ export const Cart = () => {
           </div>
         )}
         {!isCartDataLoading && cartData.carts?.length === 0 && (
-          <div className="text-center py-5 fs-3">購物車為空，再去逛逛</div>
+          <div className="text-center py-5 fs-3">購物車還沒有東西，快去逛逛</div>
         )}
         {!isCartDataLoading && cartData.carts?.length > 0 && (
           <>
