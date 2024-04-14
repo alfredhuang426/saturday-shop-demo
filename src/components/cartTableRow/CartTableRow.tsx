@@ -5,8 +5,12 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { NumberInputGroup } from "../numberInputGroup/NumberInputGroup";
 import { useDebounce } from "../../custom-hooks/useDebounce";
 import axios from "axios";
-import { notificationActions } from "../../store/notificationSlice";
+import {
+  createAsyncMessage,
+  notificationActions,
+} from "../../store/notificationSlice";
 import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store";
 
 type CartTableRowProps = {
   cartItem: CartItem;
@@ -19,7 +23,7 @@ export const CartTableRow: FC<CartTableRowProps> = ({ cartItem, getCart }) => {
   const isButtonClicked = useRef(false);
   const [isUpdateLoading, setIsUpdateLoading] = useState(false);
   const [isRemoveLoading, setIsRemoveLoading] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   console.log(cartItem);
 
@@ -33,9 +37,8 @@ export const CartTableRow: FC<CartTableRowProps> = ({ cartItem, getCart }) => {
         await getCart();
         setIsRemoveLoading(false);
         dispatch(
-          notificationActions.createMessage({
+          createAsyncMessage({
             success: result?.data?.success,
-            id: result?.data?.data?.product_id,
             message: result?.data?.message,
           })
         );
@@ -63,9 +66,8 @@ export const CartTableRow: FC<CartTableRowProps> = ({ cartItem, getCart }) => {
           await getCart();
           setIsUpdateLoading(false);
           dispatch(
-            notificationActions.createMessage({
+            createAsyncMessage({
               success: result?.data?.success,
-              id: result?.data?.data.product_id,
               message: result?.data?.message,
             })
           );

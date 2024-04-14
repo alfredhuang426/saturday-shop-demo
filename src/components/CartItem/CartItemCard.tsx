@@ -5,8 +5,12 @@ import { NumberInputGroup } from "../numberInputGroup/NumberInputGroup";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useDebounce } from "../../custom-hooks/useDebounce";
 import axios from "axios";
-import { notificationActions } from "../../store/notificationSlice";
+import {
+  createAsyncMessage,
+  notificationActions,
+} from "../../store/notificationSlice";
 import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store";
 
 type CartItemCardProps = {
   cartItem: CartItem;
@@ -17,7 +21,7 @@ export const CartItemCard: FC<CartItemCardProps> = ({ cartItem, getCart }) => {
   const [cartQuantity, setCartQuantity] = useState(1);
   const debounceCartQuantity = useDebounce(cartQuantity, 1000);
   const isButtonClicked = useRef(false);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const removeCartItem = async () => {
     try {
@@ -26,9 +30,8 @@ export const CartItemCard: FC<CartItemCardProps> = ({ cartItem, getCart }) => {
       );
       await getCart();
       dispatch(
-        notificationActions.createMessage({
+        createAsyncMessage({
           success: result?.data?.success,
-          id: result?.data?.data?.product_id,
           message: result?.data?.message,
         })
       );
@@ -52,9 +55,8 @@ export const CartItemCard: FC<CartItemCardProps> = ({ cartItem, getCart }) => {
         );
         await getCart();
         dispatch(
-          notificationActions.createMessage({
+          createAsyncMessage({
             success: result?.data?.success,
-            id: result?.data?.data.product_id,
             message: result?.data?.message,
           })
         );

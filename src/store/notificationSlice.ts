@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { NotificationInitialState } from "../types/notification.type";
 
 const initialState: NotificationInitialState = {
@@ -39,6 +39,24 @@ const notificationSlice = createSlice({
     },
   },
 });
+
+export const createAsyncMessage = createAsyncThunk(
+  "message/createAsyncMessage",
+  async function (
+    payload: { success: boolean; message: string },
+    { dispatch, requestId }
+  ) {
+    dispatch(
+      notificationSlice.actions.createMessage({
+        ...payload,
+        id: requestId,
+      })
+    );
+    setTimeout(() => {
+      dispatch(notificationSlice.actions.removeMessage(requestId));
+    }, 2000);
+  }
+);
 
 export const notificationActions = notificationSlice.actions;
 
