@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/saturday-shop-demo/static/css/main.2a355438.css",
-    "main.js": "/saturday-shop-demo/static/js/main.640b2792.js",
+    "main.css": "/saturday-shop-demo/static/css/main.58433e57.css",
+    "main.js": "/saturday-shop-demo/static/js/main.a9181903.js",
     "static/js/453.4b15c5c1.chunk.js": "/saturday-shop-demo/static/js/453.4b15c5c1.chunk.js",
     "index.html": "/saturday-shop-demo/index.html",
-    "main.2a355438.css.map": "/saturday-shop-demo/static/css/main.2a355438.css.map",
-    "main.640b2792.js.map": "/saturday-shop-demo/static/js/main.640b2792.js.map",
+    "main.58433e57.css.map": "/saturday-shop-demo/static/css/main.58433e57.css.map",
+    "main.a9181903.js.map": "/saturday-shop-demo/static/js/main.a9181903.js.map",
     "453.4b15c5c1.chunk.js.map": "/saturday-shop-demo/static/js/453.4b15c5c1.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2a355438.css",
-    "static/js/main.640b2792.js"
+    "static/css/main.58433e57.css",
+    "static/js/main.a9181903.js"
   ]
 }
