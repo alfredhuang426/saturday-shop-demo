@@ -3,13 +3,14 @@ import styles from "./More.module.scss";
 import { Product } from "../../types/products.type";
 import { FC, useEffect, useState } from "react";
 import { categoryConfig } from "../../configs/category-config";
+import { Spinner } from "../spinner/Spinner";
 
-type SliderProps = {
+type MoreProps = {
   products?: Product[];
   isLoading?: boolean;
 };
 
-export const More: FC<SliderProps> = ({ products = [], isLoading = false }) => {
+export const More: FC<MoreProps> = ({ products = [], isLoading = false }) => {
   const [isClassifiedCompleted, setIsClassifiedCompleted] =
     useState<boolean>(false);
   const [classifiedProducts, setClassifiedProducts] = useState<
@@ -39,9 +40,7 @@ export const More: FC<SliderProps> = ({ products = [], isLoading = false }) => {
     <div className="container my-5">
       {(isLoading || !isClassifiedCompleted) && (
         <div className="d-flex justify-content-center mt-5">
-          <div className="spinner-border text-primary" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
+            <Spinner />
         </div>
       )}
       <div className="row">

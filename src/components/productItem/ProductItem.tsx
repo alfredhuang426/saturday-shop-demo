@@ -4,10 +4,9 @@ import styles from "./ProductItem.module.scss";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import {
-  createAsyncMessage
-} from "../../store/notificationSlice";
+import { createAsyncMessage } from "../../store/notificationSlice";
 import { AppDispatch } from "../../store";
+import { Spinner } from "../spinner/Spinner";
 
 type ProductItemrProps = {
   product: Product;
@@ -90,14 +89,7 @@ export const ProductItem: FC<ProductItemrProps> = ({ product, getCart }) => {
                   onClick={addToCart}
                   disabled={isLoading}
                 >
-                  {isLoading && (
-                    <div
-                      className="spinner-border text-white spinner-border-sm"
-                      role="status"
-                    >
-                      <span className="visually-hidden">Loading...</span>
-                    </div>
-                  )}
+                  {isLoading && <Spinner small color="white" />}
                   {!isLoading && "加入購物車"}
                 </button>
               </div>

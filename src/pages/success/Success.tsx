@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Order } from "../../types/order.type";
 import { OrderDetail } from "../../components/orderDetail/OrderDetail";
+import { Spinner } from "../../components/spinner/Spinner";
 
 export const Success = () => {
   const { orderId } = useParams();
@@ -32,9 +33,7 @@ export const Success = () => {
       <div className="row mt-5">
         {isLoading && (
           <div className="d-flex justify-content-center mt-5">
-            <div className="spinner-border text-primary" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
+            <Spinner />
           </div>
         )}
         {!isLoading && (

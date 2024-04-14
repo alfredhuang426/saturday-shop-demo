@@ -10,13 +10,19 @@ export const Stepbar: FC<StepbarProps> = ({ step = 1 }) => {
     <>
       <ol className={`${styles.steps}`}>
         <li className={`${styles.step} ${step >= 1 ? styles.active : ""}`}>
-          <span className={`${styles["step-detail"]}`}>確認商品</span>
+          <span className={`${styles["step-detail"]} text-center`}>
+            確認商品
+          </span>
         </li>
         <li className={`${styles.step} ${step >= 2 ? styles.active : ""}`}>
-          <span className={`${styles["step-detail"]}`}>填寫資料</span>
+          <span className={`${styles["step-detail"]} text-center`}>
+            填寫資料
+          </span>
         </li>
         <li className={`${styles.step} ${step >= 3 ? styles.active : ""}`}>
-          <span className={`${styles["step-detail"]}`}>完成訂單</span>
+          <span className={`${styles["step-detail"]} text-center`}>
+            完成訂單
+          </span>
         </li>
       </ol>
     </>

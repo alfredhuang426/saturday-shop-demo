@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { Product } from "../../types/products.type";
 import styles from "./Slider.module.scss";
 import { Link } from "react-router-dom";
+import { Spinner } from "../spinner/Spinner";
 
 type SliderProps = {
   products?: Product[];
@@ -23,9 +24,7 @@ export const Slider: FC<SliderProps> = ({
         <h3 className="border-start border-5 px-3 border-primary">熱門商品</h3>
         {isLoading && (
           <div className="d-flex justify-content-center mt-5">
-            <div className="spinner-border text-primary" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
+            <Spinner />
           </div>
         )}
         {!isLoading && (

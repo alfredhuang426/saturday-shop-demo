@@ -6,6 +6,7 @@ import axios from "axios";
 import { Product } from "../../types/products.type";
 import { categoryConfig } from "../../configs/category-config";
 import { ProductItem } from "../../components/productItem/ProductItem";
+import { Spinner } from "../../components/spinner/Spinner";
 
 export const Products = () => {
   const tab = useRef<Tab | null>(null);
@@ -63,9 +64,7 @@ export const Products = () => {
       <Banner />
       {isLoading && (
         <div className="d-flex justify-content-center my-auto">
-          <div className="spinner-border text-primary" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
+          <Spinner />
         </div>
       )}
       {!isLoading && (

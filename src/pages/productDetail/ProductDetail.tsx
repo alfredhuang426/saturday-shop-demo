@@ -6,7 +6,9 @@ import styles from "./ProductDetail.module.scss";
 import { Slider } from "../../components/slider/Slider";
 import { NumberInputGroup } from "../../components/numberInputGroup/NumberInputGroup";
 import { useDispatch } from "react-redux";
-import { notificationActions } from "../../store/notificationSlice";
+import { createAsyncMessage } from "../../store/notificationSlice";
+import { Spinner } from "../../components/spinner/Spinner";
+import { AppDispatch } from "../../store";
 
 export const ProductDetail = () => {
   const [product, setProduct] = useState<Product>({
@@ -27,7 +29,7 @@ export const ProductDetail = () => {
   const [isAllProductLoading, setIsAllProductLoading] = useState(true);
   const { getCart } = useOutletContext<{ getCart: () => void }>();
   const [isLoading, setIsLoading] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const { id } = useParams();
 
@@ -71,9 +73,8 @@ export const ProductDetail = () => {
       );
       setIsLoading(false);
       dispatch(
-        notificationActions.createMessage({
+        createAsyncMessage({
           success: addToCartResult?.data?.success,
-          id: addToCartResult?.data?.data?.product_id,
           message: addToCartResult?.data?.message,
         })
       );
@@ -102,9 +103,7 @@ export const ProductDetail = () => {
         <div className="row">
           {isProductLoading && (
             <div className="d-flex justify-content-center mt-5">
-              <div className="spinner-border text-primary" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
+              <Spinner />
             </div>
           )}
           {!isProductLoading && (
@@ -130,7 +129,10 @@ export const ProductDetail = () => {
                 <div className="container mt-3">
                   <div className="row">
                     <div className="col-6">
-                      <NumberInputGroup quantity={cartQuantity} setQuantity={setCartQuantity} />
+                      <NumberInputGroup
+                        quantity={cartQuantity}
+                        setQuantity={setCartQuantity}
+                      />
                     </div>
                     <div className="col-6 pe-0">
                       <button
@@ -139,14 +141,7 @@ export const ProductDetail = () => {
                         onClick={addToCart}
                         disabled={isLoading}
                       >
-                        {isLoading && (
-                          <div
-                            className="spinner-border text-white spinner-border-sm"
-                            role="status"
-                          >
-                            <span className="visually-hidden">Loading...</span>
-                          </div>
-                        )}
+                        {isLoading && <Spinner small color="white" />}
                         {!isLoading && "加入購物車"}
                       </button>
                     </div>

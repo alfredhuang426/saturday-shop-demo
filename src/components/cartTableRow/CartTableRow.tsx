@@ -11,6 +11,7 @@ import {
 } from "../../store/notificationSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store";
+import { Spinner } from "../spinner/Spinner";
 
 type CartTableRowProps = {
   cartItem: CartItem;
@@ -24,8 +25,6 @@ export const CartTableRow: FC<CartTableRowProps> = ({ cartItem, getCart }) => {
   const [isUpdateLoading, setIsUpdateLoading] = useState(false);
   const [isRemoveLoading, setIsRemoveLoading] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
-
-  console.log(cartItem);
 
   const removeCartItem = async () => {
     try {
@@ -99,9 +98,7 @@ export const CartTableRow: FC<CartTableRowProps> = ({ cartItem, getCart }) => {
       <td className="align-middle" width="20%">
         {isUpdateLoading && (
           <div className="d-flex justify-content-center">
-            <div className="spinner-border text-primary" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
+            <Spinner />
           </div>
         )}
         {!isUpdateLoading && (
@@ -119,9 +116,7 @@ export const CartTableRow: FC<CartTableRowProps> = ({ cartItem, getCart }) => {
       <td className="align-middle text-center" width="10%">
         {isRemoveLoading && (
           <div className="d-flex justify-content-center">
-            <div className="spinner-border text-primary" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
+            <Spinner />
           </div>
         )}
         {!isRemoveLoading && (

@@ -8,6 +8,7 @@ import { Link, useOutletContext } from "react-router-dom";
 import { Cart as CartType } from "../../types/cart.type";
 import { CartItemCard } from "../../components/CartItem/CartItemCard";
 import styles from "./Cart.module.scss";
+import { Spinner } from "../../components/spinner/Spinner";
 
 export const Cart = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -47,13 +48,13 @@ export const Cart = () => {
       <div className="container pt-5">
         {isCartDataLoading && (
           <div className="d-flex justify-content-center mt-5">
-            <div className="spinner-border text-primary" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
+            <Spinner />
           </div>
         )}
         {!isCartDataLoading && cartData.carts?.length === 0 && (
-          <div className="text-center py-5 fs-3">購物車還沒有東西，快去逛逛</div>
+          <div className="text-center py-5 fs-3">
+            購物車還沒有東西，快去逛逛
+          </div>
         )}
         {!isCartDataLoading && cartData.carts?.length > 0 && (
           <>

@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { notificationActions } from "../../store/notificationSlice";
 import { RootState } from "../../store";
+import styles from "./MessageToast.module.scss";
 
 export const MessageToast = () => {
   const messages = useSelector(
@@ -14,10 +15,7 @@ export const MessageToast = () => {
   };
 
   return (
-    <div
-      className="toast-container position-fixed"
-      style={{ top: "64px", right: "15px" }}
-    >
+    <div className={`toast-container ${styles.position}`}>
       {!!messages?.length &&
         messages?.map((message) => {
           return (

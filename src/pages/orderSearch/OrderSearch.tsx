@@ -3,6 +3,7 @@ import { OrderDetail } from "../../components/orderDetail/OrderDetail";
 import { Order } from "../../types/order.type";
 import { FaSearch } from "react-icons/fa";
 import axios from "axios";
+import { Spinner } from "../../components/spinner/Spinner";
 
 export const OrderSearch = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -56,9 +57,7 @@ export const OrderSearch = () => {
         </div>
         {isLoading && (
           <div className="d-flex justify-content-center mt-5">
-            <div className="spinner-border text-primary" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
+            <Spinner />
           </div>
         )}
         {!isLoading && orderData && (

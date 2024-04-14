@@ -8,6 +8,7 @@ import { Input } from "../../components/input/Input";
 import { Textarea } from "../../components/textarea/Textarea";
 import axios from "axios";
 import { useState } from "react";
+import { Spinner } from "../../components/spinner/Spinner";
 
 export const Profile = () => {
   const { cartData, isCartDataLoading, getCart } = useOutletContext<{
@@ -58,9 +59,7 @@ export const Profile = () => {
         <div className="col-md-5">
           {isCartDataLoading && (
             <div className="d-flex justify-content-center mt-5">
-              <div className="spinner-border text-primary" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
+              <Spinner />
             </div>
           )}
           {!isCartDataLoading && (
@@ -190,14 +189,7 @@ export const Profile = () => {
                   className={`btn btn-outline-primary px-5 ${styles["custom-button"]}`}
                   disabled={isLoading}
                 >
-                  {isLoading && (
-                    <div
-                      className="spinner-border text-primary spinner-border-sm"
-                      role="status"
-                    >
-                      <span className="visually-hidden">Loading...</span>
-                    </div>
-                  )}
+                  {isLoading && <Spinner small />}
                   {!isLoading && "下一步"}
                 </button>
               </div>

@@ -1,9 +1,4 @@
-import {
-  Dispatch,
-  FC,
-  MutableRefObject,
-  SetStateAction,
-} from "react";
+import { Dispatch, FC, MutableRefObject, SetStateAction } from "react";
 import styles from "./NumberInputGroup.module.scss";
 
 type NumberInputGroupProps = {
@@ -19,7 +14,6 @@ export const NumberInputGroup: FC<NumberInputGroupProps> = ({
   isReadOnly = false,
   isButtonClicked = null,
 }) => {
-  console.log(quantity)
   return (
     <div className="input-group">
       <button
