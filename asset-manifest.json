@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/saturday-shop-demo/static/css/main.2a355438.css",
+    "main.js": "/saturday-shop-demo/static/js/main.3c4675d1.js",
+    "static/js/453.4b15c5c1.chunk.js": "/saturday-shop-demo/static/js/453.4b15c5c1.chunk.js",
+    "index.html": "/saturday-shop-demo/index.html",
+    "main.2a355438.css.map": "/saturday-shop-demo/static/css/main.2a355438.css.map",
+    "main.3c4675d1.js.map": "/saturday-shop-demo/static/js/main.3c4675d1.js.map",
+    "453.4b15c5c1.chunk.js.map": "/saturday-shop-demo/static/js/453.4b15c5c1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2a355438.css",
+    "static/js/main.3c4675d1.js"
+  ]
+}
